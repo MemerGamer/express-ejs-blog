@@ -1,8 +1,11 @@
 import express from "express";
-import LandingPageController from "../controllers/LandingPageController.js";
+import PostController from "../controllers/PostController.js";
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', LandingPageController.landingPage);
+router.get("/", PostController.landingPage);
+
+// GET post by slug
+router.get("/post/:slug", PostController.getPostBySlug);
 
 export default router;
