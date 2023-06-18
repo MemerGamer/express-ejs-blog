@@ -57,8 +57,8 @@ async function register(req, res, _next) {
       email,
       password,
     });
-    console.log(user);
-    console.log(process.env.JWT_SECRET);
+    // console.log(user);
+    // console.log(process.env.JWT_SECRET);
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -77,9 +77,15 @@ async function register(req, res, _next) {
   }
 }
 
+async function logout(_req, res, _next) {
+  res.clearCookie("token");
+  return res.redirect("/");
+}
+
 export default {
   login,
   register,
   loginPage,
   registerPage,
+  logout,
 };
