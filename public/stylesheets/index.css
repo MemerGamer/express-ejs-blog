@@ -155,3 +155,74 @@
 .user__content {
   margin-top: 20px;
 }
+
+.auth__container {
+  /* Center the container in the page */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 50%;
+  padding: 20px;
+  border: 3px solid #808080;
+  border-radius: 5px;
+}
+
+.auth__container > h1 {
+  padding-top: 30px;
+}
+
+.auth__container > form {
+  /* Center the form within the container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  /* border: 3px solid #808080; */
+  /* border-radius: 5px; */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+/* mobile friendly */
+@media (max-width: 768px) {
+  .auth__container {
+    /* Center the container in the page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    padding: 20px;
+    /* border: 3px solid #808080; */
+    /* border-radius: 5px; */
+  }
+}
+
+.auth__parent__container {
+  /* Center the .auth__container in the page */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-btn {
+  margin-top: 10px;
+}
+
+.auth__url__stuff {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.auth__url__stuff:hover {
+  text-decoration: underline;
+}
