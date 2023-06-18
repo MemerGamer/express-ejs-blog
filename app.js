@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 // import routers
 import postRouter from "./routes/post.js";
 import authRouter from "./routes/auth.js";
+import userRouter from "./routes/user.js";
 import errorHandler from "./middlewares/error-handler.js";
 import undefinedPage from "./middlewares/undefined-page.js";
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // set routes
 app.use("/", postRouter);
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 
 // if none of the above match, catch 404 and forward to error handler
 app.use(undefinedPage);

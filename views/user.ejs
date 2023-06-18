@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <title><%= title %></title>
+  </head>
+
+  <body style="overflow: hidden">
+    <!-- navbar for the blog with title log in and sign in buttons -->
+    <%- include('./components/profile_navbar') %>
+
+    <!-- main content of the user profile page, 
+      container for the profile details -->
+
+    <div class="profile">
+      <div class="profile__details">
+        <div class="profile__details__avatar">
+          <img src="<%= user.profile_picture %>" alt="avatar" />
+        </div>
+        <div class="profile__details__info">
+          <h1>Name: <%= user.name %></h1>
+          <h2>Username: <%= user.username %></h2>
+          <p>Email: <%= user.email %></p>
+          <p>Role: <%= user.role %></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>

@@ -258,3 +258,33 @@
 .commenter {
   font-weight: 700;
 }
+
+.profile {
+  padding: 20px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__details {
+  display: flex;
+  align-items: center;
+}
+
+.profile__details__avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile__details__info {
+  margin-left: 20px;
+}
+
+.profile__details__info h1,
+.profile__details__info h2,
+.profile__details__info p {
+  margin: 5px 0;
+}
