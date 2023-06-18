@@ -1,0 +1,28 @@
+<main class="main">
+    <div class="main__container">
+      <% posts.forEach(function(post) { %>
+      <div class="post">
+        <div class="post__banner">
+            <a href="/post/<%= post.slug %>"><img src="<%= post.banner_img %>" alt="banner image" /></a>
+        </div>
+        <div class="post__title">
+          <a class="post__title__link" href="/post/<%= post.slug %>"><h2><%= post.title %></h2></a>
+        </div>
+        <div class="post__author">
+          <p>Author: <%= post.author %></p>
+        </div>
+        <div class="post__category">
+          <p>Category: <%= post.category_name %></p>
+        </div>
+        <div class="post__date">
+          <p>Date: <%= post.published_at.toLocaleDateString() %></p>%></p>
+        </div>
+
+        <div class="post__likes">
+            <p>#Likes: <%= post.likes_count %></p>
+        </div>
+        
+      </div>
+      <% }); %>
+    </div>
+  </main>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <title><%= title %></title>
+  </head>
+
+  <body>
+    <!-- navbar for the blog with title log in and sign in buttons -->
+    <%- include('./components/navbar') %>
+
+    <!-- this page contains a single post -->
+    <main class="main">
+      <div class="main__container">
+        <div class="post">
+          <div class="post__banner">
+            <a href="/post/<%= post.slug %>"><img src="<%= post.banner_img %>" alt="banner image" /></a>
+          </div>
+          <div class="post__title">
+            <a class="post__title__link" href="/post/<%= post.slug %>"><h2><%= post.title %></h2></a>
+          </div>
+          <div class="post__author">
+            <p>Author: <%= post.author %></p>
+          </div>
+          <div class="post__category">
+            <p>Category: <%= post.category_name %></p>
+          </div>
+          <div class="post__date">
+            <p>Date: <%= post.published_at.toLocaleDateString() %></p>
+          </div>
+
+          <div class="post__likes">
+            <p>#Likes: <%= post.likes_count %></p>
+          </div>
+          <div class="post__content">
+            <p><%= post.content %></p>
+          </div>
+        </div>
+        <div class="comments__container">
+          <p>Comments:</p>
+          <div class="comments__comments">
+            <% comments.forEach(function(comment) { %>
+              <div class="comments__comment">
+                <div class="user__icon">
+                  <img src="<%=comment.profile_picture %>"/>
+                </div>
+                <div class="user__name">
+                  <p><%= comment.name %></p>
+                </div>
+                <div class="user__content">
+                  <p> <%= comment.content %></p>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+
+        </div>
+      </div>
+      
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
