@@ -30,7 +30,28 @@ async function postBySlug(req, res, _next) {
   res.render("post");
 }
 
+// post comment at a specific post by slug
+// POST route for posting a comment on a specific post by slug
+async function postCommentAtSlug(req, res, next) {
+  const { slug } = req.params;
+  const { content } = req.body;
+
+  try {
+    // console.log(slug);
+    const post = await CommentModel.createCommentForPostSlug(
+      slug,
+      content,
+      req.cookies.token
+    );
+
+    return res.redirect("back");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+}
 export default {
   landingPage,
   postBySlug,
+  postCommentAtSlug,
 };

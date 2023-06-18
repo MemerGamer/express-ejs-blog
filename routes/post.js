@@ -8,4 +8,6 @@ router.get("/", PostController.landingPage);
 // GET post by slug
 router.get("/post/:slug", PostController.postBySlug);
 
+// POST comment at a specific post by slug
+router.post("/post/:slug/comment", PostController.postCommentAtSlug);
 export default router;

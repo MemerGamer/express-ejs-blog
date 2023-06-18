@@ -43,6 +43,24 @@
         </div>
         <div class="comments__container">
           <p>Comments:</p>
+          <!-- if the user is logged in it can write comments else display a message -->
+          <% if (isLoggedIn === true) { %>
+            <div class="comments__item">
+              <form action="/post/<%= post.slug %>/comment" method="POST">
+                <div class="comments__item__input">
+                  <input type="text" name="content" placeholder="Write a comment..." />
+                  <div class="comments__item__submit">
+                    <button type="submit">Submit</button>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          <% } else { %>
+            <div class="comments__item">
+              <p>For commenting please <a class="auth__url__stuff" href="/auth/login">Log In</a> or <a class="auth__url__stuff" href="/auth/register">Register</a></p>
+            </div>
+          <% } %>
           <div class="comments__comments">
             <% comments.forEach(function(comment) { %>
               <div class="comments__comment">
@@ -50,7 +68,8 @@
                   <img src="<%=comment.profile_picture %>"/>
                 </div>
                 <div class="user__name">
-                  <p><%= comment.name %></p>
+                  <p class="commenter" ><%= comment.name %></p>
+                  <p>Posted at: <%= comment.posted_at.toLocaleDateString() %> </p>
                 </div>
                 <div class="user__content">
                   <p> <%= comment.content %></p>
