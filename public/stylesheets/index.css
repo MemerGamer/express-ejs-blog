@@ -1,59 +1,157 @@
-body {
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* navbar css for the blog index page*/
+
+.navbar {
+  /* thi is the navbar container */
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
-h1 {
+.navbar__links {
+  /* this contains the login and signup buttons, we need them aligned right side of the page */
+  float: right;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  color: #444;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar__title {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  float: left;
+}
+
+.title__link {
+  /* this is the link which contains the title */
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+}
+
+/* the main__container is a container for each post, each post is a little card in a grid of cards */
+
+.main__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+  margin-top: 80px;
+}
+
+@media (max-width: 768px) {
+  .main__container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
     margin-top: 80px;
-    margin-bottom: 15px;
-    font-size: 3em;
+  }
 }
 
-p {
-    margin-bottom: 100px;
+/* each post is a card, this is the card container */
+
+.main__container > div {
+  background-color: #444;
+  border-radius: 5px;
+  color: #fff;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
-.highlight {
-    font-weight: 600;
-    background: var(--text-highlight-bg);
-    color: var(--text-highlight-color);
-    padding: 0px 5px;
-    border-radius: 5px;
+.post {
+  /* align everything inside of the post center */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Add this line to center align the content horizontally */
+  text-align: center; /* Add this line to center align the text horizontally */
 }
 
-.btns-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+.post__title__link {
+  text-decoration: none;
+  color: white;
 }
 
-#logos-wrapper {
-    display: flex;
-    gap: 50px;
+/* <div class="comments__container">
+          <p>Comments:</p>
+          <div class="comments__comments">
+            <% comments.forEach(function(comment) { %>
+              <div class="comments_comment">
+                <div class="user__icon">
+
+                </div>
+                <div class="user__content">
+                  <p> <%= comment.content %></p>
+              </div>
+            <% }); %>
+          </div>
+
+        </div> */
+
+.comments__comments {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
 }
 
-#logos-wrapper img:first-child {
-    height: 90px;
-    transform: translateY(10px);
+.comments__comment {
+  padding-top: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  border: 3px solid #808080;
+  border-radius: 5px;
 }
 
-/* if the user is in dark mode, invert the logo color */
-@media (prefers-color-scheme: dark) {
-    #logos-wrapper img:first-child {
-        filter: invert(1);
-    }
+.user__icon {
+  width: 50px;
+  height: 50px;
+}
+.user__icon > img {
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
 }
 
-#logos-wrapper img {
-    height: 100px;
-}
-
-#cat-gif {
-    display: none;
-    margin-top: 10px;
-    border-radius: 5px;
-    max-height: 300px;
+.user__content {
+  margin-top: 20px;
 }
