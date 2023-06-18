@@ -6,6 +6,6 @@ const router = express.Router();
 router.get("/", PostController.landingPage);
 
 // GET post by slug
-router.get("/post/:slug", PostController.getPostBySlug);
+router.get("/post/:slug", PostController.postBySlug);
 
 export default router;

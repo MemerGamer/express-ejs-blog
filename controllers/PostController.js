@@ -11,7 +11,7 @@ async function landingPage(_req, res, _next) {
   res.render("index");
 }
 
-async function getPostBySlug(req, res, _next) {
+async function postBySlug(req, res, _next) {
   const { slug } = req.params;
   console.log(slug);
   const post = await PostModel.getPostBySlug(slug);
@@ -25,5 +25,5 @@ async function getPostBySlug(req, res, _next) {
 
 export default {
   landingPage,
-  getPostBySlug,
+  postBySlug,
 };

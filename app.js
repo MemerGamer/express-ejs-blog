@@ -6,7 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 // import routers
-import indexRouter from "./routes/index.js";
+import postRouter from "./routes/post.js";
 import errorHandler from "./middlewares/error-handler.js";
 import undefinedPage from "./middlewares/undefined-page.js";
 
@@ -27,7 +27,7 @@ app.use(cookieParser()); // parses cookies, set: res.cookie("name", "value"), ge
 app.use(express.static(path.join(__dirname, "public")));
 
 // set routes
-app.use("/", indexRouter);
+app.use("/", postRouter);
 
 // if none of the above match, catch 404 and forward to error handler
 app.use(undefinedPage);
