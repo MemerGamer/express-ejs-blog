@@ -3,7 +3,11 @@
     <a class="title__link" href="/"><h1><%= title %></h1></a>
   </div>
   <div class="navbar__links">
+    <% if (isLoggedIn === true) { %>
+    <a class="btn" href="/auth/logout">Logout</a>
+    <% } else { %>
     <a class="btn" href="/auth/login">Log in</a>
     <a class="btn" href="/auth/register">Register</a>
+    <% } %>
   </div>
 </nav>
