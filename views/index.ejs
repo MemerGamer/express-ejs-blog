@@ -1,56 +1,21 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel='stylesheet' href='/stylesheets/global.css' />
-  <link rel='stylesheet' href='/stylesheets/index.css' />
-  <title><%= title %></title>
-</head>
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <title><%= title %></title>
+  </head>
 
-<body>
-  <div id="logos-wrapper">
-    <img src="/images/expressjs.png" alt="expressjs logo">
-    <img src="/images/ejs.png" alt="ejs logo">
-  </div>
+  <body>
+    <!-- navbar for the blog with title log in and sign in buttons -->
+    <%- include('./components/navbar') %>
 
-  <h1><%= title %></h1>
-  <p>Check the <a href="<%= readmeURL %>" class="highlight">README.md</a> for more info.</p>
-
-  <div class="btns-wrapper">
-    <a class="btn btn-primary" href='/db-test'>
-      Check Database status
-      <i class="fa-solid fa-arrow-right-long"></i>
-    </a>
-
-    <a class="btn btn-danger" href='/error'>
-      Check error page
-      <i class="fa-solid fa-arrow-right-long"></i>
-    </a>
-  </div>
-
-  <div class="btns-wrapper" style="margin-top: 10px;">
-    <a class="btn" target="_blank" href="https://expressjs.com/en/4x/api.html">
-      Express docs
-      <i class="fa-solid fa-circle-info"></i>
-    </a>
-
-    <a class="btn" target="_blank" href="https://ejs.co/#docs">
-      EJS docs
-      <i class="fa-solid fa-circle-info"></i>
-    </a>
-    <button id="feeling-lucky-btn">
-      I'm feeling lucky
-      <i class="fa-solid fa-clover"></i>
-    </button>
-  </div>
-
-  <img id="cat-gif" src="https://cataas.com/cat/gif" alt="cat gif">
-
-  <script src="/javascripts/index.js"></script>
-</body>
-
+    <!-- main content of the page, container for the posts -->
+    <%- include('./components/posts') %>
+    <script src="/javascripts/index.js"></script>
+  </body>
 </html>
