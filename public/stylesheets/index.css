@@ -416,3 +416,29 @@ select option {
 .profile__posts a:hover {
   text-decoration: underline;
 }
+
+.dashboard__posts {
+  margin-top: 80px;
+}
+
+#admin__create__new {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 24px;
+  color: #999;
+}
+
+#admin__create__new a {
+  /* color: #00d5ffa4; */
+  font-weight: 500;
+}
+
+.dashboard__icon__link a {
+  font-size: 20px;
+}
+.dashboard__icon__link a:hover {
+  /*grow*/
+  text-decoration: none;
+  font-size: 25px;
+  cursor: pointer;
+}
