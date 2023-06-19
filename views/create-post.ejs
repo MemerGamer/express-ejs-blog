@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <title><%= title %></title>
+  </head>
+
+  <body>
+    <!-- navbar for the blog with title log in and sign in buttons -->
+    <%- include('./components/profile_navbar') %>
+    <div class="new__post__parent__container">
+      <%- include('./components/_new-post') %>
+    </div>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
