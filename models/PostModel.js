@@ -171,10 +171,72 @@ async function findAllPosts(searchTerm) {
   }
 }
 
+async function deletePost(slug) {
+  try {
+    // Get a connection
+    const conn = db.getConnection();
+
+    // Delete the comments associated with the post
+    await deleteCommentsByPostId(conn, slug);
+
+    // Delete the likes associated with the post
+    await deleteLikesByPostId(conn, slug);
+
+    // Delete the post
+    const [result, _columnDefinition] = await conn.query(
+      `DELETE FROM Posts WHERE slug = ?`,
+      [slug]
+    );
+
+    logger.debug(`Post deleted!`, result);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    // conn.release(); // Release the connection
+  }
+}
+
+async function deleteCommentsByPostId(conn, slug) {
+  try {
+    // Make a query to delete the comments
+    const [result, _columnDefinition] = await conn.query(
+      `DELETE FROM Comments WHERE post_id IN (SELECT id FROM Posts WHERE slug = ?)`,
+      [slug]
+    );
+
+    logger.debug(`Comments deleted!`, result);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+async function deleteLikesByPostId(conn, slug) {
+  try {
+    // Make a query to delete the likes
+    const [result, _columnDefinition] = await conn.query(
+      `DELETE FROM Likes WHERE post_id IN (SELECT id FROM Posts WHERE slug = ?)`,
+      [slug]
+    );
+
+    logger.debug(`Likes deleted!`, result);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export default {
   getAllPosts,
   getPostBySlug,
   createPost,
   likePost,
   findAllPosts,
+  deletePost,
 };

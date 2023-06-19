@@ -222,6 +222,26 @@ async function searchPost(req, res, next) {
   res.render("index");
 }
 
+async function adminDashboard(req, res, next) {
+  // load admin dashboard
+  const user = await UserModel.getUserByToken(req.cookies.token);
+  const posts = await PostModel.getAllPosts();
+
+  res.locals = {
+    title: "Admin Dashboard",
+    posts: posts,
+    id: user.id,
+  };
+
+  res.render("admin-dashboard");
+}
+
+async function deletePost(req, res, next) {
+  const { slug } = req.params;
+  await PostModel.deletePost(slug);
+  res.redirect("back");
+}
+
 export default {
   landingPage,
   postBySlug,
@@ -230,4 +250,6 @@ export default {
   createNewPost,
   postLikeAtSlug,
   searchPost,
+  adminDashboard,
+  deletePost,
 };
