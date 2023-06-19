@@ -21,7 +21,7 @@ async function getAllPosts(req, res, next) {
          AS LikeCounts ON Posts.id = LikeCounts.post_id`
     );
 
-    logger.debug(`Posts selected!`, result);
+    //logger.debug(`Posts selected!`, result);
 
     return result;
   } catch (error) {
