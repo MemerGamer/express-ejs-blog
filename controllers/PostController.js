@@ -1,17 +1,34 @@
 import { __dirname } from "../app.js";
 import PostModel from "../models/PostModel.js";
 import CommentModel from "../models/CommentModel.js";
+import UserModel from "../models/UserModel.js";
 
 async function landingPage(_req, res, _next) {
   const posts = await PostModel.getAllPosts();
   // a user is logged in if there is token in the cookies
   const isLoggedIn = !!_req.cookies.token;
-  // console.log(_req.session);
+  const userRole = await UserModel.getUserRoleByToken(_req.cookies.token);
+
+  let isAdmin, isEditor;
+
+  if (!userRole) {
+    return res.redirect("/auth/login");
+  }
+  if (userRole === "admin") {
+    isAdmin = true;
+    isEditor = false;
+  }
+  if (userRole === "editor") {
+    isAdmin = false;
+    isEditor = true;
+  }
 
   res.locals = {
     title: "Blog",
     posts: posts,
     isLoggedIn: isLoggedIn,
+    isAdmin: isAdmin,
+    isEditor: isEditor,
   };
   res.render("index");
 }
@@ -21,10 +38,27 @@ async function postBySlug(req, res, _next) {
   //console.log(slug);
   const post = await PostModel.getPostBySlug(slug);
   const isLoggedIn = !!req.cookies.token;
+  const userRole = await UserModel.getUserRoleByToken(req.cookies.token);
+
+  let isAdmin, isEditor;
+
+  if (!userRole) {
+    return res.redirect("/auth/login");
+  }
+  if (userRole === "admin") {
+    isAdmin = true;
+    isEditor = false;
+  }
+  if (userRole === "editor") {
+    isAdmin = false;
+    isEditor = true;
+  }
   res.locals = {
     title: "Blog",
     post: post.at(0),
     isLoggedIn: isLoggedIn,
+    isAdmin: isAdmin,
+    isEditor: isEditor,
     comments: await CommentModel.getAllCommentsForPostSlug(slug),
   };
   res.render("post");
@@ -32,13 +66,14 @@ async function postBySlug(req, res, _next) {
 
 // post comment at a specific post by slug
 // POST route for posting a comment on a specific post by slug
-async function postCommentAtSlug(req, res, next) {
+async function postCommentAtSlug(req, res) {
   const { slug } = req.params;
   const { content } = req.body;
 
   try {
     // console.log(slug);
-    const post = await CommentModel.createCommentForPostSlug(
+    // const post =
+    await CommentModel.createCommentForPostSlug(
       slug,
       content,
       req.cookies.token
