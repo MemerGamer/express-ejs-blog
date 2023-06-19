@@ -69,7 +69,7 @@ async function createPost(post, user) {
   try {
     // Get a connection
     const conn = db.getConnection();
-    console.log(post);
+    // console.log(post);
     // Make a query
     const [result, _columnDefinition] = await conn.query(
       "INSERT INTO Posts (title, slug, content, published_at, user_id, category_id, banner_img) VALUES (?, ?, ?, ?, ?, ?, ?)",
@@ -92,8 +92,50 @@ async function createPost(post, user) {
     throw error;
   }
 }
+
+async function likePost(slug, user_id) {
+  try {
+    // Get a connection
+    const conn = db.getConnection();
+
+    const post = await getPostBySlug(slug);
+
+    // Check if user already liked the post
+    const [likeRows, _likeColumns] = await conn.query(
+      "SELECT * FROM Likes WHERE post_id = ? AND user_id = ?",
+      [post[0].id, user_id]
+    );
+
+    let likeResult;
+
+    if (likeRows.length > 0) {
+      // User already liked the post, so dislike it
+      const [dislikeResult, _dislikeColumns] = await conn.query(
+        "DELETE FROM Likes WHERE post_id = ? AND user_id = ?",
+        [post[0].id, user_id]
+      );
+      likeResult = dislikeResult;
+    } else {
+      // User hasn't liked the post yet, so like it
+      const [likeInsertResult, _likeInsertColumns] = await conn.query(
+        "INSERT INTO Likes (post_id, user_id) VALUES (?, ?)",
+        [post[0].id, user_id]
+      );
+      likeResult = likeInsertResult;
+    }
+
+    logger.debug(`Like operation completed!`, likeResult);
+
+    return likeResult;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export default {
   getAllPosts,
   getPostBySlug,
   createPost,
+  likePost,
 };
