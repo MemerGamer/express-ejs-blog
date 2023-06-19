@@ -31,6 +31,31 @@
       </div>
     </div>
 
+    <!-- posts = [ { id: 4, title: 'Nice post', slug: 'nice-post-1', published_at:
+    2023-06-19T09:37:01.000Z }, { id: 5, title: 'XP post', slug: 'xp-post',
+    published_at: 2023-06-19T09:42:47.000Z } ] -->
+
+    <!-- display posts as a table with ejs -->
+
+    <div class="profile__posts">
+      <h1>Posts</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Published at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% posts.forEach(post => { %>
+          <tr>
+            <td><a href="/post/<%= post.slug %>"><%= post.title %></a></td>
+            <td><%= post.published_at %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
     <script src="/javascripts/index.js"></script>
   </body>
 </html>
