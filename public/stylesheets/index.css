@@ -1,7 +1,5 @@
 /* navbar css for the blog index page*/
-
 .navbar {
-  /* thi is the navbar container */
   overflow: hidden;
   background-color: #333;
   position: fixed;
@@ -10,35 +8,18 @@
   z-index: 1;
   padding: 0;
   margin: 0;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .navbar__links {
-  /* this contains the login and signup buttons, we need them aligned right side of the page */
-  float: right;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 5px;
   padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  color: #444;
-  background-color: #333;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-weight: 600;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
 }
 
 .navbar__title {
@@ -46,11 +27,9 @@
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-  float: left;
 }
 
 .title__link {
-  /* this is the link which contains the title */
   text-decoration: none;
   color: white;
   font-weight: 600;
@@ -58,6 +37,22 @@
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
+}
+
+.search__posts {
+  display: flex;
+  align-items: center;
+}
+
+.search__form {
+  margin: 0;
+}
+
+.search__input {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
 }
 
 /* the main__container is a container for each post, each post is a little card in a grid of cards */
