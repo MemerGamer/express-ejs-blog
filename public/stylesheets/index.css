@@ -358,3 +358,16 @@ select option {
 .new__post__container .btn:hover {
   background-color: #055c2b;
 }
+
+.like__btn {
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  background-color: #222;
+}
+
+.like__btn:hover {
+  background-color: #555;
+}
