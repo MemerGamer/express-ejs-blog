@@ -3,7 +3,11 @@
     <a class="title__link" href="/"><h1><%= title %></h1></a>
   </div>
   <div class="navbar__links">
-    <% if (isLoggedIn === true) { %>
+    <% if (isLoggedIn === true) { %> <% if(isAdmin === true) { %>
+    <a class="btn href=" href="/dashboard/">Dashboard</a>
+    <% } %> <% if(isEditor === true) { %>
+    <a class="btn href=" href="/post/create">Create</a>
+    <% } %>
     <a class="btn" href="/user/profile">Profile</a>
     <a class="btn" href="/auth/logout">Logout</a>
     <% } else { %>
