@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/stylesheets/global.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <title><%= post.title %></title>
+  </head>
+
+  <body style="overflow:auto;">
+    <!-- navbar for the blog with title log in and sign in buttons -->
+    <%- include('./components/navbar') %>
+
+    <!-- this page contains a single post -->
+    <main class="main">
+      <div class="main__container">
+        <div class="post">
+          <div class="post__banner">
+            <% if (post.banner_img === "" || post.banner_img === null) { %>
+            <img
+              src="https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg"
+              alt="banner image"
+            />
+            <% } else { %>
+            <img
+              src="<%= post.banner_img %>"
+              alt="banner image"
+            />
+            <% } %>
+          </div>
+          <div class="post__edit-form">
+            <form
+              id="post__edit__form"
+              action="/post/<%= post.slug %>/edit"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="title">Title:</label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value="<%= post.title %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="slug">Slug:</label>
+                <input
+                  type="text"
+                  id="slug"
+                  name="slug"
+                  value="<%= post.slug %>"
+                />
+              </div>
+              <div class="form-group">
+                <input type="text" id="original_slug" name="original_slug" value="<%= post.slug %>" hidden />
+              </div>
+              <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea id="content" name="content">
+<%= post.content %></textarea
+                >
+              </div>
+              <div class="form-group">
+                <label for="banner_img">Banner Image URL:</label>
+                <input
+                  type="text"
+                  id="banner_img"
+                  name="banner_img"
+                  value="<%= post.banner_img %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="date">Date:</label>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  value="<%= post.published_at.toISOString().split('T')[0] %>"
+                  class="datepicker"
+                />
+              </div>
+              <div class="form-group">
+                <label for="date">Category</label>
+                <select id="category" name="category">
+                  <% categories.forEach(function(category) { %>
+                    <option value="<%= category.id %>" <% if (category.id === post.category_id) { %> selected <% } %>>
+                      <%= category.name %>
+                    </option>
+                  <% }) %>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn">Save</button>
+              </div>
+            </form>
+          </div>
+          <div class="post__author">
+            <a class="author__link" href="/user/profile/<%= post.author_id %>">
+              <p>Author: <%= post.author %></p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>
