@@ -242,6 +242,36 @@ async function deletePost(req, res, next) {
   res.redirect("back");
 }
 
+async function editPost(req, res, next) {
+  const { slug } = req.params;
+  const post = await PostModel.getPostBySlug(slug);
+  const user = await UserModel.getUserByToken(req.cookies.token);
+  const categories = await CategoryModel.getAll();
+
+  res.locals = {
+    title: "Edit Post",
+    post: post.at(0),
+    id: user.id,
+    isLoggedIn: true,
+    isAdmin: true,
+    isEditor: false,
+    categories: categories,
+  };
+
+  res.render("edit-post");
+}
+
+async function saveEditedPost(req, res, next) {
+  const editedPost = req.body;
+
+  // console.log("saving post");
+  // console.log(editedPost);
+
+  await PostModel.updatePost(editedPost);
+
+  res.redirect("/dashboard/");
+}
+
 export default {
   landingPage,
   postBySlug,
@@ -252,4 +282,6 @@ export default {
   searchPost,
   adminDashboard,
   deletePost,
+  editPost,
+  saveEditedPost,
 };
