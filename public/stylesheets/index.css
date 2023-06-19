@@ -371,3 +371,10 @@ select option {
 .like__btn:hover {
   background-color: #555;
 }
+
+.author__link,
+.commenter__link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+}

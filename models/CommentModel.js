@@ -16,7 +16,7 @@ async function getAllCommentsForPostSlug(slug) {
 
     // Get all comments by post id
     const [commentsRows] = await conn.query(
-      `SELECT Comments.content, Comments.posted_at, Users.name AS name, Users.profile_picture AS profile_picture FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE post_id = ? ORDER BY posted_at DESC`,
+      `SELECT Comments.content, Comments.posted_at, Users.id as user_id, Users.name AS name, Users.profile_picture AS profile_picture FROM Comments JOIN Users ON Comments.user_id = Users.id WHERE post_id = ? ORDER BY posted_at DESC`,
       [postId]
     );
     const comments = commentsRows;

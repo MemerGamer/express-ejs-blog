@@ -9,7 +9,7 @@ async function getAllPosts(req, res, next) {
     // Make a query
     //   const [result, _columnDefinition] = await conn.query("SELECT * FROM Posts");
     const [result, _columnDefinition] = await conn.query(
-      `SELECT Posts.*, Users.name AS author, Categories.name AS category_name,
+      `SELECT Posts.*, Users.id as author_id, Users.name AS author, Categories.name AS category_name,
        COALESCE(LikeCounts.likes_count, 0) AS likes_count 
        FROM Posts 
        JOIN Users ON Posts.user_id = Users.id 
@@ -41,7 +41,7 @@ async function getPostBySlug(slug) {
     // Make a query
     //   const [result, _columnDefinition] = await conn.query("SELECT * FROM Posts WHERE slug = $1", [slug]);
     const [result, _columnDefinition] = await conn.query(
-      `SELECT Posts.*, Users.name AS author, Categories.name AS category_name, 
+      `SELECT Posts.*,Users.id as author_id, Users.name AS author, Categories.name AS category_name, 
     COALESCE(LikeCounts.likes_count, 0) AS likes_count 
     FROM Posts 
     JOIN Users ON Posts.user_id = Users.id 

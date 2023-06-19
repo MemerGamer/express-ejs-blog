@@ -7,6 +7,6 @@ const router = express.Router();
 /* GET home page. */
 router.use(checkAuth);
 router.use(checkJwt);
-router.get("/profile", UserController.displayProfile);
+router.get("/profile/:id", UserController.displayProfile);
 
 export default router;

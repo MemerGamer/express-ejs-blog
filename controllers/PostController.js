@@ -9,7 +9,7 @@ async function landingPage(_req, res, _next) {
   // a user is logged in if there is token in the cookies
   const isLoggedIn = !!_req.cookies.token;
   const userRole = await UserModel.getUserRoleByToken(_req.cookies.token);
-
+  const user = await UserModel.getUserByToken(_req.cookies.token);
   let isAdmin, isEditor;
 
   if (!userRole) {
@@ -30,6 +30,7 @@ async function landingPage(_req, res, _next) {
     isLoggedIn: isLoggedIn,
     isAdmin: isAdmin,
     isEditor: isEditor,
+    id: user.id,
   };
   res.render("index");
 }
@@ -40,6 +41,7 @@ async function postBySlug(req, res, _next) {
   const post = await PostModel.getPostBySlug(slug);
   const isLoggedIn = !!req.cookies.token;
   const userRole = await UserModel.getUserRoleByToken(req.cookies.token);
+  const user = await UserModel.getUserByToken(req.cookies.token);
 
   let isAdmin, isEditor;
 
@@ -60,6 +62,7 @@ async function postBySlug(req, res, _next) {
     isLoggedIn: isLoggedIn,
     isAdmin: isAdmin,
     isEditor: isEditor,
+    id: user.id,
     comments: await CommentModel.getAllCommentsForPostSlug(slug),
   };
   res.render("post");
@@ -94,6 +97,7 @@ async function createPost(req, res, next) {
   // console.log(categories);
 
   let isAdmin, isEditor;
+  const user = await UserModel.getUserByToken(req.cookies.token);
 
   if (!userRole) {
     return res.redirect("/auth/login");
@@ -115,6 +119,7 @@ async function createPost(req, res, next) {
     isLoggedIn: !!req.cookies.token,
     isAdmin: isAdmin,
     isEditor: isEditor,
+    id: user.id,
     categories: categories,
   };
   res.render("create-post");

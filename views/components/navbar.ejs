@@ -8,7 +8,7 @@
     <% } %> <% if(isEditor === true) { %>
     <a class="btn href=" href="/create/">Create</a>
     <% } %>
-    <a class="btn" href="/user/profile">Profile</a>
+    <a class="btn" href="/user/profile/<%= id %>">Profile</a>
     <a class="btn" href="/auth/logout">Logout</a>
     <% } else { %>
     <a class="btn" href="/auth/login">Log in</a>

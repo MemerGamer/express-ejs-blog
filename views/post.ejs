@@ -28,7 +28,9 @@
             <a class="post__title__link" href="/post/<%= post.slug %>"><h2><%= post.title %></h2></a>
           </div>
           <div class="post__author">
-            <p>Author: <%= post.author %></p>
+            <a class="author__link" href="/user/profile/<%= post.author_id %>">
+              <p>Author: <%= post.author %></p>
+            </a>
           </div>
           <div class="post__category">
             <p>Category: <%= post.category_name %></p>
@@ -77,10 +79,14 @@
             <% comments.forEach(function(comment) { %>
               <div class="comments__comment">
                 <div class="user__icon">
+                <a href="/user/profile/<%= comment.user_id %>" >
                   <img src="<%=comment.profile_picture %>"/>
+                </a>
                 </div>
                 <div class="user__name">
-                  <p class="commenter" ><%= comment.name %></p>
+                  <a class="commenter__link" href="/user/profile/<%= comment.user_id %>" >
+                    <p class="commenter" ><%= comment.name %></p>
+                  </a>
                   <p>Posted at: <%= comment.posted_at.toLocaleDateString() %> </p>
                 </div>
                 <div class="user__content">
