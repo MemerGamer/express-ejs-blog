@@ -97,9 +97,24 @@ async function getUserByToken(token) {
   }
 }
 
+async function getUserRoleByToken(token) {
+  try {
+    const result = await getUserByToken(token);
+    // console.log(result);
+    // logger.debug(`User with id(${result[0].id}) found`);
+
+    // console.log(result[0]);
+    return result.role;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 export default {
   getUserById,
   createUser,
   findOne,
   getUserByToken,
+  getUserRoleByToken,
 };
