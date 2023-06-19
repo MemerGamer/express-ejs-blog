@@ -12,6 +12,9 @@ router.get("/", PostController.landingPage);
 router.get("/create", checkJwt, checkAuth, PostController.createPost);
 router.post("/create/post", checkJwt, checkAuth, PostController.createNewPost);
 
+// Get post by search term
+router.get("/search", PostController.searchPost);
+
 // GET post by slug
 router.get("/post/:slug", PostController.postBySlug);
 
