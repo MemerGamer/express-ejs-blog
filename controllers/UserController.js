@@ -8,6 +8,9 @@ async function displayProfile(req, res, _next) {
   const userRole = await UserModel.getUserRoleByToken(token);
 
   const userToDisplay = await UserModel.getUserById(req.params.id);
+  const postWrittenByUserID = await UserModel.getPostsByUserID(req.params.id);
+  console.log(postWrittenByUserID);
+
   // console.log(userToDisplay[0]);
   console.log(user);
 
@@ -31,6 +34,7 @@ async function displayProfile(req, res, _next) {
     isAdmin: isAdmin,
     isEditor: isEditor,
     id: user.id,
+    posts: postWrittenByUserID,
   };
   res.render("user");
 }
