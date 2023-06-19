@@ -3,10 +3,20 @@ import PostController from "../controllers/PostController.js";
 
 import checkJwt from "../middlewares/check-jwt.js";
 import checkAuth from "../middlewares/check-auth.js";
+import checkAdmin from "../middlewares/check-admin.js";
 const router = express.Router();
 
 /* GET home page. */
 router.get("/", PostController.landingPage);
+
+// admin dashboard
+router.get(
+  "/dashboard",
+  checkJwt,
+  checkAuth,
+  checkAdmin,
+  PostController.adminDashboard
+);
 
 // Create
 router.get("/create", checkJwt, checkAuth, PostController.createPost);
@@ -20,6 +30,14 @@ router.get("/post/:slug", PostController.postBySlug);
 
 // POST comment at a specific post by slug
 router.post("/post/:slug/comment", PostController.postCommentAtSlug);
+
+// DELETE post by slug
+router.get(
+  "/post/:slug/delete",
+  checkJwt,
+  checkAuth,
+  PostController.deletePost
+);
 
 // POST like at a specific post by slug
 router.post("/post/:slug/like", PostController.postLikeAtSlug);
