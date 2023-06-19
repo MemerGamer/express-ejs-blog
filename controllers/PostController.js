@@ -7,31 +7,44 @@ import CategoryModel from "../models/CategoryModel.js";
 async function landingPage(_req, res, _next) {
   const posts = await PostModel.getAllPosts();
   // a user is logged in if there is token in the cookies
-  const isLoggedIn = !!_req.cookies.token;
-  const userRole = await UserModel.getUserRoleByToken(_req.cookies.token);
-  const user = await UserModel.getUserByToken(_req.cookies.token);
   let isAdmin, isEditor;
+  const isLoggedIn = !!_req.cookies.token;
+  if (isLoggedIn) {
+    const userRole = await UserModel.getUserRoleByToken(_req.cookies.token);
+    const user = await UserModel.getUserByToken(_req.cookies.token);
 
-  if (!userRole) {
-    return res.redirect("/auth/login");
-  }
-  if (userRole === "admin") {
-    isAdmin = true;
-    isEditor = false;
-  }
-  if (userRole === "editor") {
+    if (!userRole) {
+      return res.redirect("/auth/login");
+    }
+    if (userRole === "admin") {
+      isAdmin = true;
+      isEditor = false;
+    }
+    if (userRole === "editor") {
+      isAdmin = false;
+      isEditor = true;
+    }
+    res.locals = {
+      title: "Blog",
+      posts: posts,
+      isLoggedIn: isLoggedIn,
+      isAdmin: isAdmin,
+      isEditor: isEditor,
+      id: user.id,
+    };
+  } else {
     isAdmin = false;
-    isEditor = true;
+    isEditor = false;
+    res.locals = {
+      title: "Blog",
+      posts: posts,
+      isLoggedIn: isLoggedIn,
+      isAdmin: isAdmin,
+      isEditor: isEditor,
+      id: -1,
+    };
   }
 
-  res.locals = {
-    title: "Blog",
-    posts: posts,
-    isLoggedIn: isLoggedIn,
-    isAdmin: isAdmin,
-    isEditor: isEditor,
-    id: user.id,
-  };
   res.render("index");
 }
 
@@ -40,31 +53,44 @@ async function postBySlug(req, res, _next) {
   //console.log(slug);
   const post = await PostModel.getPostBySlug(slug);
   const isLoggedIn = !!req.cookies.token;
-  const userRole = await UserModel.getUserRoleByToken(req.cookies.token);
-  const user = await UserModel.getUserByToken(req.cookies.token);
 
-  let isAdmin, isEditor;
+  if (isLoggedIn) {
+    const userRole = await UserModel.getUserRoleByToken(req.cookies.token);
+    const user = await UserModel.getUserByToken(req.cookies.token);
 
-  if (!userRole) {
-    return res.redirect("/auth/login");
+    let isAdmin, isEditor;
+
+    if (!userRole) {
+      return res.redirect("/auth/login");
+    }
+    if (userRole === "admin") {
+      isAdmin = true;
+      isEditor = false;
+    }
+    if (userRole === "editor") {
+      isAdmin = false;
+      isEditor = true;
+    }
+    res.locals = {
+      title: "Blog",
+      post: post.at(0),
+      isLoggedIn: isLoggedIn,
+      isAdmin: isAdmin,
+      isEditor: isEditor,
+      id: user.id,
+      comments: await CommentModel.getAllCommentsForPostSlug(slug),
+    };
+  } else {
+    res.locals = {
+      title: "Blog",
+      post: post.at(0),
+      isLoggedIn: isLoggedIn,
+      isAdmin: false,
+      isEditor: false,
+      id: -1,
+      comments: await CommentModel.getAllCommentsForPostSlug(slug),
+    };
   }
-  if (userRole === "admin") {
-    isAdmin = true;
-    isEditor = false;
-  }
-  if (userRole === "editor") {
-    isAdmin = false;
-    isEditor = true;
-  }
-  res.locals = {
-    title: "Blog",
-    post: post.at(0),
-    isLoggedIn: isLoggedIn,
-    isAdmin: isAdmin,
-    isEditor: isEditor,
-    id: user.id,
-    comments: await CommentModel.getAllCommentsForPostSlug(slug),
-  };
   res.render("post");
 }
 

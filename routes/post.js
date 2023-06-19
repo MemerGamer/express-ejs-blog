@@ -1,13 +1,16 @@
 import express from "express";
 import PostController from "../controllers/PostController.js";
+
+import checkJwt from "../middlewares/check-jwt.js";
+import checkAuth from "../middlewares/check-auth.js";
 const router = express.Router();
 
 /* GET home page. */
 router.get("/", PostController.landingPage);
 
 // Create
-router.get("/create", PostController.createPost);
-router.post("/create/post", PostController.createNewPost);
+router.get("/create", checkJwt, checkAuth, PostController.createPost);
+router.post("/create/post", checkJwt, checkAuth, PostController.createNewPost);
 
 // GET post by slug
 router.get("/post/:slug", PostController.postBySlug);

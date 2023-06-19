@@ -30,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // set routes
 app.use("/", postRouter);
+
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 
