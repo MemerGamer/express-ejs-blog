@@ -442,3 +442,44 @@ select option {
   font-size: 25px;
   cursor: pointer;
 }
+
+.post__edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 301px;
+}
+
+.form-group textarea {
+  resize: none;
+}
+
+.post__edit-form {
+  max-width: 500px;
+}
+
+#post__edit__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post__banner img {
+  height: 100px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
