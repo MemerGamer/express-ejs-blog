@@ -21,7 +21,7 @@ async function getUserById(userID) {
 // create a new user
 async function createUser(user) {
   const { username, name, email, password } = user;
-  console.log(password);
+  // console.log(password);
   if (password.at(0) !== password.at(1)) {
     throw new Error("Passwords do not match");
   }
@@ -41,7 +41,7 @@ async function createUser(user) {
     logger.debug(`User with id(${result.insertId}) inserted`);
 
     const userRegistered = await getUserById(result.insertId);
-    console.log(userRegistered);
+    // console.log(userRegistered);
     return userRegistered[0];
   } catch (error) {
     // Handle the error
