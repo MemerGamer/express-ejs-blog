@@ -13,7 +13,7 @@ async function getUserById(userID) {
     [userID]
   );
 
-  logger.debug(`User with id(${userID}), %o`, result[0]);
+  // logger.debug(`User with id(${userID}), %o`, result[0]);
 
   return result;
 }
@@ -38,7 +38,7 @@ async function createUser(user) {
       [username, name, email, hashedPassword]
     );
 
-    logger.debug(`User with id(${result.insertId}) inserted`);
+    // logger.debug(`User with id(${result.insertId}) inserted`);
 
     const userRegistered = await getUserById(result.insertId);
     // console.log(userRegistered);
@@ -122,7 +122,7 @@ async function getPostsByUserID(userID) {
       [userID]
     );
 
-    logger.debug(`User with id(${userID}), %o`, result[0]);
+    // logger.debug(`User with id(${userID}), %o`, result[0]);
 
     return result;
   } catch (error) {
