@@ -28,7 +28,15 @@
         <div class="post__likes">
             <p>#Likes: <%= post.likes_count %></p>
         </div>
-        
+
+        <% if(isLoggedIn) { %>
+          <div class="post__like">
+            <form action="/post/<%= post.slug %>/like" method="POST">
+              <button type="submit" class="btn like__btn">👍</button>
+            </form>
+          </div>
+          <% } %>
+
       </div>
       <% }); %>
     </div>
