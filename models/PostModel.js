@@ -18,7 +18,8 @@ async function getAllPosts(req, res, next) {
          SELECT post_id, COUNT(*) AS likes_count
          FROM Likes 
          GROUP BY post_id )
-         AS LikeCounts ON Posts.id = LikeCounts.post_id`
+         AS LikeCounts ON Posts.id = LikeCounts.post_id
+        ORDER BY Posts.published_at DESC`
     );
 
     //logger.debug(`Posts selected!`, result);
