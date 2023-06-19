@@ -8,6 +8,8 @@ This project was made for webtechnologies exam.
 
 ## Features
 
+### Implemented
+
 - [x] Login and Registration
 - [x] Session management with JWT
 - [x] Admin dashboard for managing posts
@@ -20,10 +22,19 @@ This project was made for webtechnologies exam.
 - [x] View a specific user and its infos (including name, role, email, posts that he/she wrote)
 - [x] Like and unlike system for posts
 - [x] Create comments on a post if the user is logged in
+
+### Not Implemented yet
+
 - [ ] Edit comments if the user has appropriate rule
 - [ ] Delete comments if the user has appropriate rule
 - [ ] Add user from admin dashboard
+- [ ] Edit user from admin dashboard
+- [ ] Delete user from admin dashboard
 - [ ] Filter posts by category (category system is implemented, only the filter is missing)
+- [ ] Add categories from admin dashboard
+- [ ] Edit categories from admin dashboard
+- [ ] Delete categories from admin dashboard
+- [ ] Make the UI more responsive
 
 ## Installation
 
@@ -36,7 +47,7 @@ This project was made for webtechnologies exam.
 2. Install npm packages
 
    ```console
-    npkg install
+    npm install
    ```
 
 3. Create a .env file
