@@ -65,7 +65,35 @@ async function getPostBySlug(slug) {
   }
 }
 
+async function createPost(post, user) {
+  try {
+    // Get a connection
+    const conn = db.getConnection();
+    console.log(post);
+    // Make a query
+    const [result, _columnDefinition] = await conn.query(
+      "INSERT INTO Posts (title, slug, content, published_at, user_id, category_id, banner_img) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [
+        post.title,
+        post.slug,
+        post.content,
+        new Date(),
+        user.id,
+        post.category,
+        post.banner_img,
+      ]
+    );
+
+    logger.debug(`Posts created!`, result);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 export default {
   getAllPosts,
   getPostBySlug,
+  createPost,
 };
