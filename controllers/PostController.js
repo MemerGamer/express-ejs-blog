@@ -2,6 +2,7 @@ import { __dirname } from "../app.js";
 import PostModel from "../models/PostModel.js";
 import CommentModel from "../models/CommentModel.js";
 import UserModel from "../models/UserModel.js";
+import CategoryModel from "../models/CategoryModel.js";
 
 async function landingPage(_req, res, _next) {
   const posts = await PostModel.getAllPosts();
@@ -85,8 +86,53 @@ async function postCommentAtSlug(req, res) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 }
+// post creation page with ejs
+async function createPost(req, res, next) {
+  const userRole = await UserModel.getUserRoleByToken(req.cookies.token);
+  const categories = await CategoryModel.getAll();
+
+  console.log(categories);
+
+  let isAdmin, isEditor;
+
+  if (!userRole) {
+    return res.redirect("/auth/login");
+  }
+  if (userRole === "default") {
+    return res.redirect("/");
+  }
+  if (userRole === "admin") {
+    isAdmin = true;
+    isEditor = false;
+  }
+  if (userRole === "editor") {
+    isAdmin = false;
+    isEditor = true;
+  }
+
+  res.locals = {
+    title: "Create Post",
+    isLoggedIn: !!req.cookies.token,
+    isAdmin: isAdmin,
+    isEditor: isEditor,
+    categories: categories,
+  };
+  res.render("create-post");
+}
+
+// post to postmodel with
+async function createNewPost(req, res) {
+  const post = req.body;
+  const user = await UserModel.getUserByToken(req.cookies.token);
+  const result = await PostModel.createPost(post, user);
+  console.log(result);
+  res.redirect("/");
+}
+
 export default {
   landingPage,
   postBySlug,
   postCommentAtSlug,
+  createPost,
+  createNewPost,
 };
