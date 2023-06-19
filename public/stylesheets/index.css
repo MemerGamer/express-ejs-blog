@@ -378,3 +378,46 @@ select option {
   color: #fff;
   font-weight: 700;
 }
+
+.profile__posts {
+  width: 589px;
+  margin: 0 auto;
+}
+
+.profile__posts h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile__posts table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profile__posts th,
+.profile__posts td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #222;
+}
+
+.profile__posts th {
+  background-color: #2222;
+}
+
+.profile__posts tbody tr:nth-child(even) {
+  background-color: #444;
+}
+
+.profile__posts tbody tr:hover {
+  background-color: #666;
+}
+
+.profile__posts a {
+  color: #00d5ffa4;
+  text-decoration: none;
+}
+
+.profile__posts a:hover {
+  text-decoration: underline;
+}
