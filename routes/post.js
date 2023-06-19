@@ -14,4 +14,7 @@ router.get("/post/:slug", PostController.postBySlug);
 
 // POST comment at a specific post by slug
 router.post("/post/:slug/comment", PostController.postCommentAtSlug);
+
+// POST like at a specific post by slug
+router.post("/post/:slug/like", PostController.postLikeAtSlug);
 export default router;
