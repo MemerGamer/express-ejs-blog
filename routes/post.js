@@ -5,6 +5,10 @@ const router = express.Router();
 /* GET home page. */
 router.get("/", PostController.landingPage);
 
+// Create
+router.get("/create", PostController.createPost);
+router.post("/create/post", PostController.createNewPost);
+
 // GET post by slug
 router.get("/post/:slug", PostController.postBySlug);
 
