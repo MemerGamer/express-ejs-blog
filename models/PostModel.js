@@ -54,7 +54,7 @@ async function getPostBySlug(slug) {
       [slug]
     );
 
-    logger.debug(`Posts selected!`, result);
+    // logger.debug(`Posts selected!`, result);
 
     return result;
   } catch (error) {
@@ -84,7 +84,7 @@ async function createPost(post, user) {
       ]
     );
 
-    logger.debug(`Posts created!`, result);
+    // logger.debug(`Posts created!`, result);
 
     return result;
   } catch (error) {
@@ -124,7 +124,7 @@ async function likePost(slug, user_id) {
       likeResult = likeInsertResult;
     }
 
-    logger.debug(`Like operation completed!`, likeResult);
+    // logger.debug(`Like operation completed!`, likeResult);
 
     return likeResult;
   } catch (error) {
@@ -161,7 +161,7 @@ async function findAllPosts(searchTerm) {
     ];
 
     const [result, _columnDefinition] = await conn.query(query, params);
-    logger.debug(`Posts selected!`, result);
+    // logger.debug(`Posts selected!`, result);
     return result;
   } catch (error) {
     console.error(error);
@@ -188,7 +188,7 @@ async function deletePost(slug) {
       [slug]
     );
 
-    logger.debug(`Post deleted!`, result);
+    // logger.debug(`Post deleted!`, result);
 
     return result;
   } catch (error) {
@@ -207,7 +207,7 @@ async function deleteCommentsByPostId(conn, slug) {
       [slug]
     );
 
-    logger.debug(`Comments deleted!`, result);
+    // logger.debug(`Comments deleted!`, result);
 
     return result;
   } catch (error) {
@@ -223,7 +223,7 @@ async function deleteLikesByPostId(conn, slug) {
       [slug]
     );
 
-    logger.debug(`Likes deleted!`, result);
+    // logger.debug(`Likes deleted!`, result);
 
     return result;
   } catch (error) {
@@ -232,6 +232,36 @@ async function deleteLikesByPostId(conn, slug) {
   }
 }
 
+async function updatePost(post) {
+  try {
+    // Get a connection
+    const conn = db.getConnection();
+    // console.log(post.slug);
+    // console.log(post.original_slug);
+    console.log(post);
+    // Make a query
+    // Make a query
+    const [result, _columnDefinition] = await conn.query(
+      `UPDATE Posts SET title = ?, slug = ?, content = ?, category_id = ?, banner_img = ?, published_at = ? WHERE slug = ?`,
+      [
+        post.title,
+        post.slug,
+        post.content,
+        post.category,
+        post.banner_img,
+        post.date,
+        post.original_slug,
+      ]
+    );
+
+    logger.debug(`Posts updated!`, result);
+
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 export default {
   getAllPosts,
   getPostBySlug,
@@ -239,4 +269,5 @@ export default {
   likePost,
   findAllPosts,
   deletePost,
+  updatePost,
 };
