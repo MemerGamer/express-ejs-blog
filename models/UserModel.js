@@ -111,10 +111,35 @@ async function getUserRoleByToken(token) {
   }
 }
 
+async function getPostsByUserID(userID) {
+  try {
+    // Get a connection
+    const conn = db.getConnection();
+
+    // Make a query
+    const [result, _columnDefinition] = await conn.query(
+      "SELECT id, title, slug, published_at FROM Posts WHERE user_id =?",
+      [userID]
+    );
+
+    logger.debug(`User with id(${userID}), %o`, result[0]);
+
+    return result;
+  } catch (error) {
+    // Handle the error
+    logger.debug(`Error finding user: ${error.message}`);
+    throw error;
+  } finally {
+    // Release the connection
+    // conn.release();
+  }
+}
+
 export default {
   getUserById,
   createUser,
   findOne,
   getUserByToken,
   getUserRoleByToken,
+  getPostsByUserID,
 };
