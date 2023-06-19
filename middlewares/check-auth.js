@@ -13,6 +13,6 @@ export default function checkAuth(req, res, next) {
   } else {
     // Token doesn't exist, user is not logged in
     // You can redirect the user to the login page or send an error response
-    res.redirect("/login"); // Redirect to the login page
+    res.redirect("/auth/login"); // Redirect to the login page
   }
 }
