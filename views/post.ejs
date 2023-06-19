@@ -19,8 +19,11 @@
       <div class="main__container">
         <div class="post">
           <div class="post__banner">
-            <a href="/post/<%= post.slug %>"><img src="<%= post.banner_img %>" alt="banner image" /></a>
-          </div>
+            <% if (post.banner_img === "" || post.banner_img===null) { %>
+              <img src="https://menaiortho.com.au/wp-content/uploads/2015/03/banner-placeholder.jpg" alt="banner image" />
+            <% } else { %>
+              <img src="<%= post.banner_img %>" alt="banner image" />
+            <% } %></div>
           <div class="post__title">
             <a class="post__title__link" href="/post/<%= post.slug %>"><h2><%= post.title %></h2></a>
           </div>
