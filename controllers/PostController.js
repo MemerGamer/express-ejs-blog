@@ -170,6 +170,58 @@ async function postLikeAtSlug(req, res, next) {
   res.redirect("back");
 }
 
+//search post by params
+// Search post by query
+async function searchPost(req, res, next) {
+  console.log("User searched for:");
+  const searchTerms = req.query.search;
+
+  console.log(searchTerms);
+
+  const posts = await PostModel.findAllPosts(searchTerms);
+
+  // a user is logged in if there is token in the cookies
+  let isAdmin, isEditor;
+  const isLoggedIn = !!req.cookies.token;
+  if (isLoggedIn) {
+    const userRole = await UserModel.getUserRoleByToken(req.cookies.token);
+    const user = await UserModel.getUserByToken(req.cookies.token);
+
+    if (!userRole) {
+      return res.redirect("/auth/login");
+    }
+    if (userRole === "admin") {
+      isAdmin = true;
+      isEditor = false;
+    }
+    if (userRole === "editor") {
+      isAdmin = false;
+      isEditor = true;
+    }
+    res.locals = {
+      title: "Blog",
+      posts: posts,
+      isLoggedIn: isLoggedIn,
+      isAdmin: isAdmin,
+      isEditor: isEditor,
+      id: user.id,
+    };
+  } else {
+    isAdmin = false;
+    isEditor = false;
+    res.locals = {
+      title: "Blog",
+      posts: posts,
+      isLoggedIn: isLoggedIn,
+      isAdmin: isAdmin,
+      isEditor: isEditor,
+      id: -1,
+    };
+  }
+
+  res.render("index");
+}
+
 export default {
   landingPage,
   postBySlug,
@@ -177,4 +229,5 @@ export default {
   createPost,
   createNewPost,
   postLikeAtSlug,
+  searchPost,
 };

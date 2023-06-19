@@ -133,9 +133,48 @@ async function likePost(slug, user_id) {
   }
 }
 
+// find all posts matching the search term
+
+async function findAllPosts(searchTerm) {
+  try {
+    const conn = await db.getConnection();
+
+    const query = `
+  SELECT Posts.*, Users.id AS author_id, Users.name AS author, Categories.name AS category_name,
+    COALESCE(LikeCounts.likes_count, 0) AS likes_count 
+  FROM Posts 
+  JOIN Users ON Posts.user_id = Users.id 
+  JOIN Categories ON Posts.category_id = Categories.id 
+  LEFT JOIN (
+    SELECT post_id, COUNT(*) AS likes_count
+    FROM Likes 
+    GROUP BY post_id
+  ) AS LikeCounts ON Posts.id = LikeCounts.post_id
+  WHERE Posts.title LIKE ? OR Posts.content LIKE ? OR Users.name LIKE ?
+  ORDER BY Posts.published_at DESC
+`;
+
+    const params = [
+      `%${searchTerm.toLowerCase()}%`,
+      `%${searchTerm.toLowerCase()}%`,
+      `%${searchTerm.toLowerCase()}%`,
+    ];
+
+    const [result, _columnDefinition] = await conn.query(query, params);
+    logger.debug(`Posts selected!`, result);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    // conn.release(); // Release the connection
+  }
+}
+
 export default {
   getAllPosts,
   getPostBySlug,
   createPost,
   likePost,
+  findAllPosts,
 };
