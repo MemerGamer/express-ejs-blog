@@ -2,6 +2,16 @@
   <div class="navbar__title">
     <a class="title__link" href="/"><h1><%= title %></h1></a>
   </div>
+  <div class="search__posts">
+    <form class="search__form" action="/search" method="GET">
+      <input
+        class="search__input"
+        type="text"
+        name="search"
+        placeholder="Search..."
+      />
+    </form>
+  </div>
   <div class="navbar__links">
     <% if (isLoggedIn === true) { %> <% if(isAdmin === true) { %>
     <a class="btn href=" href="/dashboard/">Dashboard</a>
