@@ -6,6 +6,8 @@
 
 This project was made for webtechnologies exam.
 
+[Preview Screenshots](./project-demo/README.md)
+
 ## Features
 
 ### Implemented
