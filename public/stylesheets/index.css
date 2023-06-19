@@ -288,3 +288,73 @@
 .profile__details__info p {
   margin: 5px 0;
 }
+
+.new__post__parent__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.new__post__container {
+  width: 400px;
+  padding: 20px;
+  background-color: #444;
+  border: 1px solid #444;
+  border-radius: 5px;
+}
+
+.new__post__container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.new__post__container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new__post__container input[type="text"],
+.new__post__container select,
+.new__post__container textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+}
+
+.new__post__container textarea {
+  height: 90px;
+  white-space: pre-wrap;
+  overflow: auto;
+  resize: none;
+}
+
+option:checked {
+  color: rgb(255, 255, 255);
+  background-color: #333;
+}
+
+select option {
+  color: rgb(255, 255, 255);
+  background-color: #555;
+}
+.new__post__container .btn {
+  padding: 10px 20px;
+  /* background-color: #007bff; */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new__post__container .btn.auth-btn {
+  background-color: #28a745;
+}
+.new__post__container .btn.centered {
+  text-align: center;
+}
+
+.new__post__container .btn:hover {
+  background-color: #055c2b;
+}
