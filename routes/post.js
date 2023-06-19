@@ -36,7 +36,25 @@ router.get(
   "/post/:slug/delete",
   checkJwt,
   checkAuth,
+  checkAdmin,
   PostController.deletePost
+);
+
+// EDIT post by slug
+router.get(
+  "/post/:slug/edit",
+  checkJwt,
+  checkAuth,
+  checkAdmin,
+  PostController.editPost
+);
+
+router.post(
+  "/post/:slug/edit",
+  checkAuth,
+  checkJwt,
+  checkAdmin,
+  PostController.saveEditedPost
 );
 
 // POST like at a specific post by slug
