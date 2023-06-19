@@ -91,7 +91,7 @@ async function createPost(req, res, next) {
   const userRole = await UserModel.getUserRoleByToken(req.cookies.token);
   const categories = await CategoryModel.getAll();
 
-  console.log(categories);
+  // console.log(categories);
 
   let isAdmin, isEditor;
 
@@ -125,8 +125,18 @@ async function createNewPost(req, res) {
   const post = req.body;
   const user = await UserModel.getUserByToken(req.cookies.token);
   const result = await PostModel.createPost(post, user);
-  console.log(result);
+  // console.log(result);
   res.redirect("/");
+}
+
+async function postLikeAtSlug(req, res, next) {
+  const { slug } = req.params;
+  console.log(slug);
+
+  const user = await UserModel.getUserByToken(req.cookies.token);
+  const result = await PostModel.likePost(slug, user.id);
+  // console.log(result);
+  res.redirect("back");
 }
 
 export default {
@@ -135,4 +145,5 @@ export default {
   postCommentAtSlug,
   createPost,
   createNewPost,
+  postLikeAtSlug,
 };
